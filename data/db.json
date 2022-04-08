@@ -1,0 +1,67 @@
+{
+  "users": [
+    {
+      "email": "ali@gmail.com",
+      "name": "Ali",
+      "id": 1
+    },
+    {
+      "email": "ali@gmail.com",
+      "name": "Ali",
+      "id": 2
+    },
+    {
+      "email": "ali@gmail.com",
+      "name": "Ali",
+      "id": 3
+    },
+    {
+      "email": "ali@gmail.com",
+      "name": "Ali",
+      "id": 4
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "name": "Project ABC",
+      "creation": "01/15/2022",
+      "description": "This is description ABC.",
+      "url": "wwww.abc.com",
+      "status": 2,
+      "standard-basic": "2022-04-07T20:46:08.506"
+    },
+    {
+      "id": 2,
+      "name": "DEF",
+      "creation": "02/15/2022",
+      "description": "This is description DEF.",
+      "url": "wwww.def.com",
+      "status": 1
+    },
+    {
+      "id": 3,
+      "name": "GHI",
+      "creation": "03/15/2022",
+      "description": "This is description GHI.",
+      "url": "wwww.ghi.com",
+      "status": 2
+    },
+    {
+      "id": 4,
+      "name": "JKLM",
+      "creation": "04/10/2022",
+      "description": "This is description JKLM.",
+      "url": "wwww.jklm.com",
+      "status": 2
+    },
+    {
+      "id": 5,
+      "name": "MNO",
+      "creation": "04/12/2022",
+      "description": "This is description MNO.",
+      "url": "wwww.mno.com",
+      "status": 1
+    }
+  ]
+}
