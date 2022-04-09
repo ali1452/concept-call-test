@@ -7,7 +7,14 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
-import { Button, Alert, CircularProgress, Typography } from "@mui/material";
+import {
+  Button,
+  Alert,
+  CircularProgress,
+  Typography,
+  Stack,
+  Pagination,
+} from "@mui/material";
 import EditProject from "./EditProject";
 
 import { useQuery, useMutation, useQueryClient } from "react-query";
@@ -18,9 +25,7 @@ function createData(id, name, creation, status) {
 }
 
 export default function Projects({ status }) {
-  const [open, setOpen] = React.useState(true);
   const queryClient = useQueryClient();
-  const handleOpen = () => setOpen(false);
   const queryString = status === "all" ? "" : `status=${status}`;
   console.log({ status, queryString });
 
@@ -80,7 +85,9 @@ export default function Projects({ status }) {
                   </TableCell>
                   <TableCell align="center">{row.name}</TableCell>
                   <TableCell align="center">{row.creation}</TableCell>
-                  <TableCell align="center">{row.status}</TableCell>
+                  <TableCell align="center">
+                    {row.status === 1 ? "Complete" : "Archive"}
+                  </TableCell>
                   <TableCell align="center">{row.description}</TableCell>
                   <TableCell align="left">
                     <Box sx={{ display: "flex" }}>
@@ -104,6 +111,9 @@ export default function Projects({ status }) {
           </Table>
         </TableContainer>
       </div>
+      <Stack spacing={2} style={{ marginX: "50%" }}>
+        <Pagination count={5} variant="outlined" shape="rounded" />
+      </Stack>
     </>
   );
 }

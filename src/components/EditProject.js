@@ -2,17 +2,26 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
-import { CardActions, CardContent, TextField } from "@mui/material";
+import {
+  CardActions,
+  CardContent,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import { useFormik } from "formik";
 
 import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
+import { Box } from "@mui/system";
 
 export default function EditProject({ project }) {
   const formik = useFormik({
     initialValues: project,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      // alert(JSON.stringify(values, null, 2));
       mutation.mutate(values);
       setOpen(false);
     },
@@ -20,7 +29,7 @@ export default function EditProject({ project }) {
   const [open, setOpen] = React.useState(false);
   const queryClient = useQueryClient();
 
-  console.log("project", project);
+  // console.log("project", project);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -90,7 +99,7 @@ export default function EditProject({ project }) {
               value={formik.values.creation}
               onChange={formik.handleChange}
             />
-            <TextField
+            {/* <TextField
               fullWidth
               id="standard-basic"
               label="Status"
@@ -98,7 +107,21 @@ export default function EditProject({ project }) {
               name="status"
               value={formik.values.status}
               onChange={formik.handleChange}
-            />
+            /> */}
+            <FormControl variant="standard" fullWidth>
+              <InputLabel id="demo-simple-select-label">Status</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={formik.values.status}
+                name="status"
+                label="Status"
+                onChange={formik.handleChange}
+              >
+                <MenuItem value={1}>Complete</MenuItem>
+                <MenuItem value={2}>Acrhived</MenuItem>
+              </Select>
+            </FormControl>
           </CardContent>
           <CardActions>
             <Button type="submit" size="small">

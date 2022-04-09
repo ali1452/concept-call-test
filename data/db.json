@@ -27,21 +27,20 @@
       "name": "Project ABC",
       "creation": "01/15/2022",
       "description": "This is description ABC.",
-      "url": "wwww.abc.com",
-      "status": 2,
-      "standard-basic": "2022-04-07T20:46:08.506"
+      "url": "www.defprojects.com",
+      "status": 1
     },
     {
       "id": 2,
-      "name": "DEF",
+      "name": "Project DEF",
       "creation": "02/15/2022",
       "description": "This is description DEF.",
-      "url": "wwww.def.com",
+      "url": "www.defprojects.com",
       "status": 1
     },
     {
       "id": 3,
-      "name": "GHI",
+      "name": "Project GHI",
       "creation": "03/15/2022",
       "description": "This is description GHI.",
       "url": "wwww.ghi.com",
@@ -53,7 +52,7 @@
       "creation": "04/10/2022",
       "description": "This is description JKLM.",
       "url": "wwww.jklm.com",
-      "status": 2
+      "status": 1
     },
     {
       "id": 5,
@@ -62,6 +61,31 @@
       "description": "This is description MNO.",
       "url": "wwww.mno.com",
       "status": 1
+    },
+    {
+      "name": "Management Project",
+      "description": "This management project",
+      "url": "www.mangt.com",
+      "creation": "12/4/2021",
+      "id": 8,
+      "status": 2
+    },
+    {
+      "name": "Finance Project",
+      "description": "This Finance project",
+      "url": "www.mangt.com",
+      "creation": "12/4/2021",
+      "id": 9,
+      "status": 1
+    },
+    {
+      "name": "HR Project",
+      "description": "Human resource mangement",
+      "url": "www.hrp.com",
+      "creation": "1/15/2022",
+      "id": 10,
+      "status": 2
     }
+    
   ]
 }
