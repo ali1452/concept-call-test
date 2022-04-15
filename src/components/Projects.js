@@ -51,16 +51,20 @@ export default function Projects({ status }) {
   if (error) return <Alert>An error has occurred: {error.message}</Alert>;
 
   return (
-    <>
+    <Stack style={{ backgroundColor: "#5891ed", height: "100vh" }}>
       <Typography
         sx={{ marginX: 5, marginTop: -5, marginBottom: 2 }}
         variant="h5"
       >
-        Projects Details
+        {status == 1 ? "Completed Projects Detail" : " Projects Details"}
       </Typography>
 
       <div
-        style={{ border: "1px solid black", maxWidth: 1400, marginLeft: 20 }}
+        style={{
+          border: "1px solid black",
+          maxWidth: 1400,
+          marginLeft: 20,
+        }}
       >
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -114,6 +118,6 @@ export default function Projects({ status }) {
       <Stack spacing={2} style={{ marginX: "50%" }}>
         <Pagination count={5} variant="outlined" shape="rounded" />
       </Stack>
-    </>
+    </Stack>
   );
 }

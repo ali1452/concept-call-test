@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button, Card, CardContent, Typography } from "@mui/material";
@@ -7,13 +7,17 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 
 function Register(props) {
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+
   const mutation = useMutation((user) => {
     return axios.post("http://localhost:8000/users", user);
   });
   const navigate = useNavigate();
 
   return (
-    <>
+    <div style={{ backgroundColor: "#cce6ff", height: "100vh" }}>
       <Card
         sx={{
           display: "inline-block",
@@ -36,13 +40,21 @@ function Register(props) {
             autoComplete="off"
           >
             <div>
-              <TextField required id="outlined-required" label="Name" />
+              <TextField
+                required
+                id="outlined-required"
+                label="Name"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+              />
               <TextField
                 required
                 id="outlined-required"
                 label="Password"
                 type="password"
                 autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <TextField
                 required
@@ -50,6 +62,8 @@ function Register(props) {
                 label="Confirm Password"
                 type="password"
                 autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
 
               <TextField
@@ -57,13 +71,15 @@ function Register(props) {
                 id="outlined-email"
                 label="email"
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <Button
               style={{ marginLeft: "20px" }}
               variant="contained"
               onClick={() => {
-                mutation.mutate({ email: "ali@gmail.com", name: "Ali" });
+                mutation.mutate({ email: email, name: userName });
                 navigate("/");
               }}
             >
@@ -72,7 +88,7 @@ function Register(props) {
           </Box>
         </CardContent>
       </Card>
-    </>
+    </div>
   );
 }
 

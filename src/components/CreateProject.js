@@ -27,6 +27,7 @@ export default function CreateProject() {
       sx={{
         marginX: "5%",
         height: "auto",
+        width: "90%",
       }}
     >
       <Box

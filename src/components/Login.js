@@ -8,7 +8,7 @@ function Login(props) {
   const { setIsLoggedIn } = useContext(UserContext);
   const navigate = useNavigate();
   return (
-    <div>
+    <div style={{ backgroundColor: "#cce6ff", height: "100vh" }}>
       <Card
         sx={{
           display: "inline-block",

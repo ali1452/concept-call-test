@@ -19,6 +19,21 @@
       "email": "ali@gmail.com",
       "name": "Ali",
       "id": 4
+    },
+    {
+      "email": "abbas@example.com",
+      "name": "abbas",
+      "id": 5
+    },
+    {
+      "email": "aliabbas@mailinator.com",
+      "name": "",
+      "id": 6
+    },
+    {
+      "email": "iqbal@example.com",
+      "name": "Iqbal",
+      "id": 7
     }
   ],
   "projects": [
@@ -26,9 +41,9 @@
       "id": 1,
       "name": "Project ABC",
       "creation": "01/15/2022",
-      "description": "This is description ABC.",
+      "description": "This is description for ABC.",
       "url": "www.defprojects.com",
-      "status": 1
+      "status": 2
     },
     {
       "id": 2,
@@ -56,7 +71,7 @@
     },
     {
       "id": 5,
-      "name": "MNO",
+      "name": "MNO App",
       "creation": "04/12/2022",
       "description": "This is description MNO.",
       "url": "wwww.mno.com",
@@ -72,7 +87,7 @@
     },
     {
       "name": "Finance Project",
-      "description": "This Finance project",
+      "description": "This is a Finance project",
       "url": "www.mangt.com",
       "creation": "12/4/2021",
       "id": 9,
@@ -80,12 +95,27 @@
     },
     {
       "name": "HR Project",
-      "description": "Human resource mangement",
+      "description": "Human resource management",
       "url": "www.hrp.com",
       "creation": "1/15/2022",
       "id": 10,
       "status": 2
+    },
+    {
+      "name": "Traveller",
+      "description": "This is application for travel",
+      "url": "www.trv.com",
+      "creation": "4/12/2022",
+      "id": 11,
+      "status": 2
+    },
+    {
+      "name": "Iqbal Company",
+      "description": "this is IT company",
+      "url": "www.iqbal.com",
+      "creation": "2/5/2022",
+      "id": 12,
+      "status": 1
     }
-    
   ]
 }

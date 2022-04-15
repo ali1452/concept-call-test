@@ -65,7 +65,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 export default function Dashboard() {
-  const { setIsLoggedIn } = useContext(UserContext);
+  // const { setIsLoggedIn } = useContext(UserContext);
   const navigation = useNavigate();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -99,6 +99,7 @@ export default function Dashboard() {
             variant="h6"
             noWrap
             component="div"
+            data-testid="header"
           >
             ConceptCall
           </Typography>
@@ -163,6 +164,15 @@ export default function Dashboard() {
             button
           >
             Archive Projects
+          </ListItem>
+          <ListItem
+            onClick={() => {
+              navigation("products");
+              handleDrawerClose();
+            }}
+            button
+          >
+            Products
           </ListItem>
           <ListItem
             onClick={() => {
