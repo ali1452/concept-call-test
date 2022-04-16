@@ -1,9 +1,14 @@
 import * as React from "react";
 import TreeView from "@mui/lab/TreeView";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import TreeItem from "@mui/lab/TreeItem";
-import { Checkbox, TextField, Typography } from "@mui/material";
+import { Checkbox, Stack, TextField, Typography } from "@mui/material";
+
+const DeviceVariants = ({ title }) => (
+  <Stack sx={{ fontSize: "18px" }}>
+    {title}
+    <Typography variant="subtitle2">200 + devices</Typography>
+  </Stack>
+);
 
 const data = {
   id: "root",
@@ -31,15 +36,15 @@ const data = {
                   children: [
                     {
                       id: "9",
-                      name: "128GB",
+                      name: <DeviceVariants title="128" />,
                     },
                     {
                       id: "10",
-                      name: "256GB",
+                      name: <DeviceVariants title="256" />,
                     },
                     {
                       id: "11",
-                      name: "512GB",
+                      name: <DeviceVariants title="512" />,
                     },
                   ],
                 },
@@ -49,15 +54,15 @@ const data = {
                   children: [
                     {
                       id: "12",
-                      name: "128GB",
+                      name: <DeviceVariants title="128" />,
                     },
                     {
                       id: "13",
-                      name: "256GB",
+                      name: <DeviceVariants title="256" />,
                     },
                     {
                       id: "14",
-                      name: "512GB",
+                      name: <DeviceVariants title="512" />,
                     },
                   ],
                 },
