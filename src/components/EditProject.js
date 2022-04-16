@@ -15,13 +15,11 @@ import { useFormik } from "formik";
 
 import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
-import { Box } from "@mui/system";
 
 export default function EditProject({ project }) {
   const formik = useFormik({
     initialValues: project,
     onSubmit: (values) => {
-      // alert(JSON.stringify(values, null, 2));
       mutation.mutate(values);
       setOpen(false);
     },
@@ -91,23 +89,15 @@ export default function EditProject({ project }) {
             />
             <TextField
               fullWidth
-              disabled
+              // disabled
               id="standard-basic"
               label="Creation Date"
               variant="standard"
+              type="date"
               name="creation"
               value={formik.values.creation}
               onChange={formik.handleChange}
             />
-            {/* <TextField
-              fullWidth
-              id="standard-basic"
-              label="Status"
-              variant="standard"
-              name="status"
-              value={formik.values.status}
-              onChange={formik.handleChange}
-            /> */}
             <FormControl variant="standard" fullWidth>
               <InputLabel id="demo-simple-select-label">Status</InputLabel>
               <Select

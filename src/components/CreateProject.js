@@ -62,13 +62,15 @@ export default function CreateProject() {
         <Input
           fullWidth
           placeholder="Creation date"
+          type="date"
           inputProps={ariaLabel}
           value={creation}
           onChange={(e) => setCreation(e.target.value)}
         />
         <Input
           fullWidth
-          placeholder="url"
+          placeholder="URL"
+          type="email"
           inputProps={ariaLabel}
           value={url}
           onChange={(e) => setUrl(e.target.value)}
