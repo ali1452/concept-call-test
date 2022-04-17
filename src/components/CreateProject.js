@@ -1,19 +1,45 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Input from "@mui/material/Input";
-import { Button, Card, Pagination, Stack, Typography } from "@mui/material";
+import { Button, Card, Pagination, Typography } from "@mui/material";
 import { useMutation } from "react-query";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const ariaLabel = { "aria-label": "description" };
 
 export default function CreateProject() {
-  const [name, setName] = React.useState("");
-  const [description, setDescription] = React.useState("");
-  const [url, setUrl] = React.useState("");
-  const [creation, setCreation] = React.useState("");
+  const validationSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(5, "Should be 5 character long")
+      .max(15, "should not exceed 15 characters")
+      .required("Project name is required"),
+
+    description: Yup.string()
+      .min(5, "Should be 5 character long")
+      .max(50, "should not exceed 50 characters")
+      .required("Description is required"),
+
+    url: Yup.string()
+      .email("invalid email address")
+      .required("email is required"),
+  });
   const navigate = useNavigate();
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      description: "",
+      url: "",
+      creation: "",
+    },
+    validationSchema,
+    onSubmit: (values) => {
+      mutation.mutate(values);
+      relocate();
+    },
+  });
 
   const relocate = () => {
     navigate("/dashboard/projects/all");
@@ -27,11 +53,14 @@ export default function CreateProject() {
       sx={{
         marginX: "5%",
         height: "auto",
-        width: "90%",
+        width: "360px",
+        // minWidth: "100%",
+        maxWidth: "80%",
       }}
     >
       <Box
         component="form"
+        onSubmit={formik.handleSubmit}
         sx={{
           "& > :not(style)": { m: 2 },
           display: "inline-block",
@@ -49,48 +78,47 @@ export default function CreateProject() {
           fullWidth
           placeholder="Project name"
           inputProps={ariaLabel}
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          name="name"
+          value={formik.values.name}
+          onChange={formik.handleChange}
         />
+        <Typography sx={{ color: "error.main" }} variant="subtitle2">
+          {formik.errors.name ? formik.errors.name : null}
+        </Typography>
         <Input
           fullWidth
           placeholder="Description"
           inputProps={ariaLabel}
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          name="description"
+          value={formik.values.description}
+          onChange={formik.handleChange}
         />
+        <Typography sx={{ color: "error.main" }} variant="subtitle2">
+          {formik.errors.description ? formik.errors.description : null}
+        </Typography>
         <Input
           fullWidth
           placeholder="Creation date"
           type="date"
           inputProps={ariaLabel}
-          value={creation}
-          onChange={(e) => setCreation(e.target.value)}
+          name="creation"
+          value={formik.values.creation}
+          onChange={formik.handleChange}
         />
         <Input
           fullWidth
           placeholder="URL"
           type="email"
           inputProps={ariaLabel}
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
+          name="url"
+          value={formik.values.url}
+          onChange={formik.handleChange}
         />
+        <Typography sx={{ color: "error.main" }} variant="subtitle2">
+          {formik.errors.url ? formik.errors.url : null}
+        </Typography>
         <Button
-          onClick={() => {
-            mutation.mutate(
-              {
-                name,
-                description,
-                url,
-                creation,
-              },
-              setName(""),
-              setDescription(""),
-              setUrl(""),
-              setCreation(""),
-              relocate()
-            );
-          }}
+          type="submit"
           style={{ margin: 10 }}
           variant="contained"
           fullWidth
