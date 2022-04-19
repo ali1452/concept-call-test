@@ -12,15 +12,20 @@ import {
   TextField,
 } from "@mui/material";
 import { useFormik } from "formik";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 
 export default function EditProject({ project }) {
+  const notify = () => toast("Wow so easy!");
+
   const formik = useFormik({
     initialValues: project,
     onSubmit: (values) => {
       mutation.mutate(values);
+      notify();
       setOpen(false);
     },
   });
@@ -117,6 +122,7 @@ export default function EditProject({ project }) {
             <Button type="submit" size="small">
               Update
             </Button>
+            <ToastContainer />
           </CardActions>
         </form>
       </Dialog>

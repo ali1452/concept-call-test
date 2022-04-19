@@ -7,6 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
+import DeleteIcon from "@mui/icons-material/Delete";
 import {
   Button,
   Alert,
@@ -14,6 +15,7 @@ import {
   Typography,
   Stack,
   Pagination,
+  IconButton,
 } from "@mui/material";
 import EditProject from "./EditProject";
 
@@ -31,13 +33,27 @@ export default function Projects({ status }) {
 
   const { isLoading, error, data } = useQuery(["projects", status], () =>
     axios
-      .get(`http://localhost:8000/projects?${queryString}`)
+      .get(`http://localhost:8000/projects?_limit=10&${queryString}`)
       .then((res) => res.data)
   );
   // console.log("data", data);
+
   const mutation = useMutation(
     (project) => {
       return axios.put("http://localhost:8000/projects/" + project.id, project);
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("projects");
+      },
+    }
+  );
+  const deleteRow = useMutation(
+    (project) => {
+      return axios.delete(
+        "http://localhost:8000/projects/" + project.id,
+        project
+      );
     },
     {
       onSuccess: () => {
@@ -75,7 +91,7 @@ export default function Projects({ status }) {
                 <TableCell align="center">Creation</TableCell>
                 <TableCell align="center">Status</TableCell>
                 <TableCell align="center">Description</TableCell>
-                <TableCell align="left">Action</TableCell>
+                <TableCell align="left">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -93,7 +109,7 @@ export default function Projects({ status }) {
                     {row.status === 1 ? "Complete" : "Archive"}
                   </TableCell>
                   <TableCell align="center">{row.description}</TableCell>
-                  <TableCell align="left">
+                  <TableCell align="center">
                     <Box sx={{ display: "flex" }}>
                       <EditProject project={row} />
                       {row.status !== 2 && (
@@ -107,6 +123,23 @@ export default function Projects({ status }) {
                           Archived
                         </Button>
                       )}
+                      {/* <Button
+                        variant="outlined"
+                        style={{ marginLeft: "8px" }}
+                        onClick={() => {
+                          deleteRow.mutate(row);
+                        }}
+                      >
+                        Delete
+                      </Button> */}
+                      <IconButton
+                        aria-label="delete"
+                        onClick={() => {
+                          deleteRow.mutate(row);
+                        }}
+                      >
+                        <DeleteIcon color="error" />
+                      </IconButton>
                     </Box>
                   </TableCell>
                 </TableRow>
@@ -115,7 +148,10 @@ export default function Projects({ status }) {
           </Table>
         </TableContainer>
       </div>
-      <Stack spacing={2} style={{ marginX: "50%" }}>
+      <Stack
+        spacing={2}
+        style={{ marginLeft: "auto", marginTop: "4px", marginRight: "15px" }}
+      >
         <Pagination count={5} variant="outlined" shape="rounded" />
       </Stack>
     </Stack>

@@ -38,18 +38,10 @@
   ],
   "projects": [
     {
-      "id": 1,
-      "name": "Project ABC",
-      "creation": "2022-04-29",
-      "description": "This is description for ABC.",
-      "url": "www.defprojects.com",
-      "status": 2
-    },
-    {
       "id": 2,
       "name": "Project DEF",
       "creation": "2022-04-22",
-      "description": "This is description DEF.",
+      "description": "This is description of DEF.",
       "url": "www.defprojects.com",
       "status": 1
     },
@@ -66,24 +58,8 @@
       "name": "JKLM",
       "creation": "2022-04-08",
       "description": "This is description JKLM.",
-      "url": "wwww.jklm.com",
+      "url": "www.jklm.com",
       "status": 1
-    },
-    {
-      "id": 5,
-      "name": "MNO App",
-      "creation": "2022-04-23",
-      "description": "This is description MNO.",
-      "url": "wwww.mno.com",
-      "status": 1
-    },
-    {
-      "name": "Management Project",
-      "description": "This management project",
-      "url": "www.mangt.com",
-      "creation": "2022-04-25",
-      "id": 8,
-      "status": 2
     },
     {
       "name": "Finance Project",
@@ -134,19 +110,11 @@
       "status": 2
     },
     {
-      "name": "Time Table App",
-      "description": "Application for manage time management",
-      "url": "timetab@example.com",
-      "creation": "2022-04-17",
+      "name": "Beauty Runs App",
+      "description": "This is an e-commerce application.",
+      "url": "beautyruns@example.com",
+      "creation": "2022-04-19",
       "id": 15,
-      "status": 1
-    },
-    {
-      "name": "Alpha Project",
-      "description": "This is Alpha project.",
-      "url": "alpha@example.com",
-      "creation": "2022-04-20",
-      "id": 16,
       "status": 1
     }
   ]
