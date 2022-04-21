@@ -8,7 +8,7 @@ function Login(props) {
   const { setIsLoggedIn } = useContext(UserContext);
   const navigate = useNavigate();
   return (
-    <div style={{ backgroundColor: "#cce6ff", height: "100vh" }}>
+    <div style={{ height: "100vh" }}>
       <Card
         sx={{
           display: "inline-block",
@@ -17,6 +17,7 @@ function Login(props) {
           border: "1px solid black",
           maxWidth: "90%",
           height: "300px",
+          backgroundColor: "#f6f2f7",
         }}
       >
         <Box

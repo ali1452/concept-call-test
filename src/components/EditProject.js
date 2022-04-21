@@ -2,10 +2,13 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
+import EditIcon from "@material-ui/icons/Edit";
+
 import {
   CardActions,
   CardContent,
   FormControl,
+  IconButton,
   InputLabel,
   MenuItem,
   Select,
@@ -53,9 +56,9 @@ export default function EditProject({ project }) {
   );
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Edit
-      </Button>
+      <IconButton color="success" variant="outlined" onClick={handleClickOpen}>
+        <EditIcon />
+      </IconButton>
       <Dialog
         open={open}
         onClose={handleClose}

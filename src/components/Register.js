@@ -17,7 +17,7 @@ function Register(props) {
   const navigate = useNavigate();
 
   return (
-    <div style={{ backgroundColor: "#cce6ff", height: "100vh" }}>
+    <div style={{ height: "100vh" }}>
       <Card
         sx={{
           display: "inline-block",
@@ -25,6 +25,7 @@ function Register(props) {
           marginLeft: "8%",
           border: "1px solid black",
           maxWidth: "90%",
+          backgroundColor: "#f6f2f7",
         }}
       >
         <CardContent>

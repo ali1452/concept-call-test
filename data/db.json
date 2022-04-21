@@ -38,84 +38,66 @@
   ],
   "projects": [
     {
-      "id": 2,
-      "name": "Project DEF",
-      "creation": "2022-04-22",
-      "description": "This is description of DEF.",
-      "url": "www.defprojects.com",
-      "status": 1
-    },
-    {
-      "id": 3,
-      "name": "Project GHI",
-      "creation": "2022-04-14",
-      "description": "This is description GHI.",
-      "url": "wwww.ghi.com",
-      "status": 2
-    },
-    {
-      "id": 4,
-      "name": "JKLM",
-      "creation": "2022-04-08",
-      "description": "This is description JKLM.",
-      "url": "www.jklm.com",
-      "status": 1
-    },
-    {
-      "name": "Finance Project",
-      "description": "This is a Finance project",
-      "url": "www.mangt.com",
-      "creation": "2022-04-06",
-      "id": 9,
-      "status": 1
-    },
-    {
-      "name": "HR Project",
-      "description": "Human resource management",
-      "url": "www.hrp.com",
+      "name": "New Project",
+      "description": "This is a new project.",
+      "url": "new@example.com",
       "creation": "2022-04-01",
-      "id": 10,
+      "id": 1,
       "status": 2
     },
     {
-      "name": "Traveller",
-      "description": "This is application for travel",
-      "url": "www.trv.com",
-      "creation": "2022-03-23",
-      "id": 11,
-      "status": 2
-    },
-    {
-      "name": "Iqbal Company",
-      "description": "this is IT company",
-      "url": "www.iqbal.com",
-      "creation": "2022-03-30",
-      "id": 12,
+      "name": "M&B Stitch",
+      "description": "This is stitching company.",
+      "url": "mnb@example.com",
+      "creation": "2022-04-15",
+      "id": 2,
       "status": 1
     },
     {
-      "name": "AL-Mirah ",
-      "description": "Al-Mirah group of Company",
-      "url": "www.almirah.com",
-      "creation": "2022-04-17",
-      "id": 13,
+      "name": "Social Parlay",
+      "description": "This is golf Club Appication.",
+      "url": "socialparlay@example.com",
+      "creation": "2022-02-08",
+      "id": 3,
       "status": 1
     },
     {
-      "name": "Laskson Group",
-      "description": "This is lakson group of companies.",
-      "url": "www.lks.grp.com",
-      "creation": "2022-04-19",
-      "id": 14,
-      "status": 2
+      "name": "School Management ",
+      "description": "This is school management application.",
+      "url": "school@example.com",
+      "creation": "2022-04-13",
+      "id": 4,
+      "status": 1
     },
     {
-      "name": "Beauty Runs App",
-      "description": "This is an e-commerce application.",
-      "url": "beautyruns@example.com",
-      "creation": "2022-04-19",
-      "id": 15,
+      "name": "Cash Management",
+      "description": "Cash flow mangement application",
+      "url": "cash@example.com",
+      "creation": "2022-04-04",
+      "id": 5,
       "status": 1
+    },
+    {
+      "name": "Recruitment App",
+      "description": "This is for employees and employers.",
+      "url": "recrut@example.com",
+      "creation": "2022-02-15",
+      "id": 6
+    },
+    {
+      "name": "Sales App",
+      "description": "Sales force management application.",
+      "url": "salesapp@example.com",
+      "creation": "2022-04-22",
+      "id": 7,
+      "status": 1
+    },
+    {
+      "name": "Todo App",
+      "description": "This is daily routine application.",
+      "url": "todo@example.com",
+      "creation": "2022-04-13",
+      "id": 8
     }
   ]
 }

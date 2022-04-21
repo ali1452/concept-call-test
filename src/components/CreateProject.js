@@ -14,12 +14,12 @@ export default function CreateProject() {
   const validationSchema = Yup.object().shape({
     name: Yup.string()
       .min(5, "Should be 5 character long")
-      .max(15, "should not exceed 15 characters")
+      .max(20, "should not exceed 20 characters")
       .required("Project name is required"),
 
     description: Yup.string()
       .min(5, "Should be 5 character long")
-      .max(50, "should not exceed 50 characters")
+      .max(100, "should not exceed 100 characters")
       .required("Description is required"),
 
     url: Yup.string()
@@ -56,6 +56,7 @@ export default function CreateProject() {
         width: "360px",
         // minWidth: "100%",
         maxWidth: "80%",
+        backgroundColor: "#f6f2f7",
       }}
     >
       <Box
@@ -107,7 +108,7 @@ export default function CreateProject() {
         />
         <Input
           fullWidth
-          placeholder="URL"
+          placeholder="Email"
           type="email"
           inputProps={ariaLabel}
           name="url"

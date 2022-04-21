@@ -7,9 +7,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
-import DeleteIcon from "@mui/icons-material/Delete";
+import ArchiveIcon from "@material-ui/icons/Archive";
 import {
-  Button,
   Alert,
   CircularProgress,
   Typography,
@@ -18,13 +17,10 @@ import {
   IconButton,
 } from "@mui/material";
 import EditProject from "./EditProject";
+import AlertDialog from "./Dialogue";
 
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import axios from "axios";
-
-function createData(id, name, creation, status) {
-  return { id, name, creation, status };
-}
 
 export default function Projects({ status }) {
   const queryClient = useQueryClient();
@@ -33,7 +29,7 @@ export default function Projects({ status }) {
 
   const { isLoading, error, data } = useQuery(["projects", status], () =>
     axios
-      .get(`http://localhost:8000/projects?_limit=10&${queryString}`)
+      .get(`http://localhost:8000/projects?${queryString}`)
       .then((res) => res.data)
   );
   // console.log("data", data);
@@ -41,19 +37,6 @@ export default function Projects({ status }) {
   const mutation = useMutation(
     (project) => {
       return axios.put("http://localhost:8000/projects/" + project.id, project);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("projects");
-      },
-    }
-  );
-  const deleteRow = useMutation(
-    (project) => {
-      return axios.delete(
-        "http://localhost:8000/projects/" + project.id,
-        project
-      );
     },
     {
       onSuccess: () => {
@@ -86,12 +69,24 @@ export default function Projects({ status }) {
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell align="right">ID</TableCell>
-                <TableCell align="center">Projects Name</TableCell>
-                <TableCell align="center">Creation</TableCell>
-                <TableCell align="center">Status</TableCell>
-                <TableCell align="center">Description</TableCell>
-                <TableCell align="left">Actions</TableCell>
+                <TableCell align="right">
+                  <strong>ID</strong>
+                </TableCell>
+                <TableCell align="center">
+                  <strong>Projects Name</strong>
+                </TableCell>
+                <TableCell align="center">
+                  <strong>Creation</strong>
+                </TableCell>
+                <TableCell align="center">
+                  <strong>Status</strong>
+                </TableCell>
+                <TableCell align="center">
+                  <strong>Description</strong>
+                </TableCell>
+                <TableCell align="left">
+                  <strong>Actions</strong>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -113,33 +108,17 @@ export default function Projects({ status }) {
                     <Box sx={{ display: "flex" }}>
                       <EditProject project={row} />
                       {row.status !== 2 && (
-                        <Button
+                        <IconButton
                           variant="outlined"
                           style={{ marginLeft: "8px" }}
                           onClick={() => {
                             mutation.mutate({ ...row, status: 2 });
                           }}
                         >
-                          Archived
-                        </Button>
+                          <ArchiveIcon />
+                        </IconButton>
                       )}
-                      {/* <Button
-                        variant="outlined"
-                        style={{ marginLeft: "8px" }}
-                        onClick={() => {
-                          deleteRow.mutate(row);
-                        }}
-                      >
-                        Delete
-                      </Button> */}
-                      <IconButton
-                        aria-label="delete"
-                        onClick={() => {
-                          deleteRow.mutate(row);
-                        }}
-                      >
-                        <DeleteIcon color="error" />
-                      </IconButton>
+                      <AlertDialog project={row} />
                     </Box>
                   </TableCell>
                 </TableRow>
