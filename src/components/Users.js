@@ -10,41 +10,40 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
-import ArchiveIcon from "@material-ui/icons/Archive";
 import {
   Alert,
   CircularProgress,
   Typography,
   Stack,
   Pagination,
-  IconButton,
+  Avatar
 } from "@mui/material";
 
-import EditProject from "./EditProject";
-import AlertDialog from "./Dialogue";
+import EditUsers from "./EditUsers";
+import UsersAlertDialog from "./UsersAlerDialog";
 
-export default function Projects({ status }) {
+export default function Users({ status }) {
   const [pageNumber,setPageNumber] =React.useState(1)
   const queryClient = useQueryClient();
-  const queryString = status === "all" ? "" : `status=${status}`;
+//   const queryString = status === "all" ? "" : `status=${status}`;
   // console.log({ status, queryString });
   const handleChange = (event, value) => {
     return setPageNumber(value);}
 
-  const { isLoading, error, data } = useQuery(["projects",pageNumber, status], () =>
+  const { isLoading, error, data } = useQuery(["users",pageNumber], () =>
     axios
-      .get(`http://localhost:8000/projects?_limit=5&_page=${pageNumber}&${queryString}`)
+      .get(`http://localhost:8000/users?_limit=5&_page=${pageNumber}`)
       .then((res) => res.data)
   );
   // console.log("data", data.length);
 
   const mutation = useMutation(
-    (project) => {
-      return axios.put("http://localhost:8000/projects/" + project.id, project);
+    (user) => {
+      return axios.put("http://localhost:8000/users/" + user.id, user);
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries("projects");
+        queryClient.invalidateQueries("users");
       },
     }
   );
@@ -59,7 +58,7 @@ export default function Projects({ status }) {
         sx={{ marginX: 5, marginTop: -5, marginBottom: 2 }}
         variant="h5"
       >
-        {status == 1 ? "Completed Projects Detail" : " Projects Details"}
+        Users Detail
       </Typography>
 
       <div
@@ -73,21 +72,30 @@ export default function Projects({ status }) {
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
+              <TableCell align="left">
+                  <strong>Profile</strong>
+                </TableCell>
                 <TableCell align="right">
                   <strong>ID</strong>
                 </TableCell>
                 <TableCell align="center">
-                  <strong>Projects Name</strong>
+                  <strong>First Name</strong>
                 </TableCell>
                 <TableCell align="center">
-                  <strong>Creation</strong>
+                  <strong>Last Name</strong>
                 </TableCell>
                 <TableCell align="center">
+                  <strong>Email</strong>
+                </TableCell>
+                <TableCell align="center">
+                  <strong>Gender</strong>
+                </TableCell>
+                {/* <TableCell align="center">
                   <strong>Status</strong>
                 </TableCell>
                 <TableCell align="center">
                   <strong>Description</strong>
-                </TableCell>
+                </TableCell> */}
                 <TableCell align="left">
                   <strong>Actions</strong>
                 </TableCell>
@@ -99,20 +107,27 @@ export default function Projects({ status }) {
                   key={row.id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
+                     <TableCell align="right" component="th" scope="row">
+                     <Avatar alt="Remy Sharp" src={row.url} />
+                  </TableCell>
                   <TableCell align="right" component="th" scope="row">
                     {row.id}
                   </TableCell>
-                  <TableCell align="center">{row.name}</TableCell>
-                  <TableCell align="center">{row.creation}</TableCell>
+                  <TableCell align="center">{row.first_name}</TableCell>
+                  <TableCell align="center">{row.last_name}</TableCell>
+
+                  <TableCell align="center">{row.email}</TableCell>
+                  {/* <TableCell align="center">{row.gender}</TableCell> */}
+
                   <TableCell align="center">
-                    {row.status === 1 ? "Complete" : "Archive"}
+                    {row.gender==1?"Male":"Female"}
                   </TableCell>
-                  <TableCell align="center">{row.description}</TableCell>
+                  {/* <TableCell align="center">{row.description}</TableCell> */}
                   <TableCell align="center">
                     <Box sx={{ display: "flex" }}>
-                      <EditProject project={row} />
-                      <AlertDialog project={row} />
-                      {row.status !== 2 && (
+                      <EditUsers users={row} />
+                      <UsersAlertDialog users={row} />
+                      {/* {row.status !== 2 && (
                         <IconButton
                           variant="outlined"
                           style={{ marginLeft: "8px" }}
@@ -122,7 +137,7 @@ export default function Projects({ status }) {
                         >
                           <ArchiveIcon />
                         </IconButton>
-                      )}
+                      )} */}
                     </Box>
                   </TableCell>
                 </TableRow>
@@ -135,7 +150,7 @@ export default function Projects({ status }) {
         spacing={2}
         style={{ marginLeft: "auto", marginTop: "4px", marginRight: "15px" }}
       >
-        <Pagination count={3} variant="outlined" shape="rounded"  onChange={handleChange}/>
+        <Pagination count={4} variant="outlined" shape="rounded"  onChange={handleChange}/>
       </Stack>
     </Stack>
   );

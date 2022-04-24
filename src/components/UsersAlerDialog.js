@@ -11,19 +11,19 @@ import { IconButton } from "@mui/material";
 import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 
-export default function AlertDialog({ project }) {
+export default function UsersAlertDialog({ users }) {
   const [open, setOpen] = React.useState(false);
   const queryClient = useQueryClient();
   const deleteRow = useMutation(
-    (project) => {
+    (user) => {
       return axios.delete(
-        "http://localhost:8000/projects/" + project?.id,
-        project
+        "http://localhost:8000/users/" + user?.id,
+        user
       );
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries("projects");
+        queryClient.invalidateQueries("users");
       },
     }
   );
@@ -49,14 +49,14 @@ export default function AlertDialog({ project }) {
         <DialogTitle id="alert-dialog-title">{"Confirm?"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure want to delete <strong>{project.name}</strong>?
+            Are you sure want to delete <strong>{users.first_name}</strong>?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>No</Button>
           <Button
             color="error"
-            onClick={() => deleteRow.mutate(project)}
+            onClick={() => deleteRow.mutate(users)}
             autoFocus
           >
             Yes

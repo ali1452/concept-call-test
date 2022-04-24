@@ -9,6 +9,7 @@ import Projects from "./components/Projects";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Products from "./components/Products";
+import Users from "./components/Users";
 
 export const queryClient = new QueryClient();
 export const UserContext = createContext();
@@ -47,6 +48,7 @@ function App() {
           />
           <Route path="edit" element={<EditProject />} />
           <Route path="products" element={<Products />} />
+          <Route path="users" element={<Users />} />
         </Routes>
       </>
     );

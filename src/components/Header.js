@@ -176,6 +176,15 @@ export default function Dashboard() {
           </ListItem>
           <ListItem
             onClick={() => {
+              navigation("users");
+              handleDrawerClose();
+            }}
+            button
+          >
+            Users
+          </ListItem>
+          <ListItem
+            onClick={() => {
               navigation("/");
               handleDrawerClose();
             }}
