@@ -3,13 +3,13 @@ import { Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 import Header from "./components/Header";
-import CreateProject from "./components/CreateProject";
-import EditProject from "./components/EditProject";
-import Projects from "./components/Projects";
+import CreateProject from "./components/projects/CreateProject";
+import EditProject from "./components/projects/EditProject";
+import Projects from "./components/projects/Projects";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Products from "./components/Products";
-import Users from "./components/Users";
+import Users from "./components/users/Users";
 
 export const queryClient = new QueryClient();
 export const UserContext = createContext();
@@ -49,6 +49,7 @@ function App() {
           <Route path="edit" element={<EditProject />} />
           <Route path="products" element={<Products />} />
           <Route path="users" element={<Users />} />
+
         </Routes>
       </>
     );

@@ -35,7 +35,6 @@ export default function EditUsers({ users }) {
   const [open, setOpen] = React.useState(false);
   const queryClient = useQueryClient();
 
-  // console.log("project", project);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -95,26 +94,6 @@ export default function EditUsers({ users }) {
               value={formik.values.email}
               onChange={formik.handleChange}
             />
-            {/* <TextField
-              fullWidth
-              id="standard-basic"
-              label="Gender"
-              name="gender"
-              variant="standard"
-              value={formik.values.gender}
-              onChange={formik.handleChange}
-            /> */}
-            {/* <TextField
-              fullWidth
-              // disabled
-              id="standard-basic"
-              label="Creation Date"
-              variant="standard"
-              type="date"
-              name="creation"
-              value={formik.values.creation}
-              onChange={formik.handleChange}
-            /> */}
             <FormControl variant="standard" fullWidth>
               <InputLabel id="demo-simple-select-label">Gender</InputLabel>
               <Select

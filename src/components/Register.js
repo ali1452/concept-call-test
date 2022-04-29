@@ -1,96 +1,133 @@
-import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { Button, Card, CardContent, Typography } from "@mui/material";
+
 import { useMutation } from "react-query";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Input from "@mui/material/Input";
+import { Button, Card, Typography } from "@mui/material";
 
-function Register(props) {
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+const ariaLabel = { "aria-label": "description" };
+
+export default function Register() {
+  const validationSchema = Yup.object().shape({
+    first_name: Yup.string()
+      .min(3, "Should be 3 character long")
+      .max(20, "should not exceed 20 characters")
+      .required("First name is required"),
+
+    last_name: Yup.string()
+      .min(3, "Should be 5 character long")
+      .max(20, "should not exceed 20 characters")
+      .required("Last name is required"),
+
+    email: Yup.string()
+      .email("invalid email address")
+      .required("email is required"),
+  });
+  const navigate = useNavigate();
+  const formik = useFormik({
+    initialValues: {
+      first_name: "",
+      last_name: "",
+      email: "",
+    },
+    validationSchema,
+    onSubmit: (values) => {
+      mutation.mutate(values);
+      relocate();
+    },
+  });
+
+  const relocate = () => {
+    navigate("/");
+  };
 
   const mutation = useMutation((user) => {
     return axios.post("http://localhost:8000/users", user);
   });
-  const navigate = useNavigate();
-
   return (
-    <div style={{ height: "100vh" }}>
-      <Card
+    <Card
+      sx={{
+        marginX: "5%",
+        marginTop:"5%",
+        height: "auto",
+        width: "360px",
+        // minWidth: "100%",
+        maxWidth: "80%",
+        backgroundColor: "#f6f2f7",
+        textAlign:"center"
+      }}
+    >
+      <Box
+        component="form"
+        onSubmit={formik.handleSubmit}
         sx={{
+          "& > :not(style)": { m: 2 },
           display: "inline-block",
-          marginTop: "10%",
-          marginLeft: "8%",
-          border: "1px solid black",
           maxWidth: "90%",
-          backgroundColor: "#f6f2f7",
+          alignItems: "center",
         }}
+        noValidate
+        autoComplete="off"
       >
-        <CardContent>
-          <Typography sx={{ textAlign: "center" }} variant="h5">
-            Register
-          </Typography>
-          <Box
-            component="form"
-            sx={{
-              "& .MuiTextField-root": { m: 2, width: "25ch", display: "flex" },
-            }}
-            noValidate
-            autoComplete="off"
-          >
-            <div>
-              <TextField
-                required
-                id="outlined-required"
-                label="Name"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-              />
-              <TextField
-                required
-                id="outlined-required"
-                label="Password"
-                type="password"
-                autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <TextField
-                required
-                id="outlined-required"
-                label="Confirm Password"
-                type="password"
-                autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-
-              <TextField
-                required
-                id="outlined-email"
-                label="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <Button
-              style={{ marginLeft: "20px" }}
-              variant="contained"
-              onClick={() => {
-                mutation.mutate({ email: email, name: userName });
-                navigate("/");
-              }}
-            >
-              Register
-            </Button>
-          </Box>
-        </CardContent>
-      </Card>
-    </div>
+        <Typography variant="h5" sx={{ textAlign: "center" }}>
+          New User
+        </Typography>
+        <Input
+          fullWidth
+          placeholder="First name"
+          inputProps={ariaLabel}
+          name="first_name"
+          value={formik.values.first_name}
+          onChange={formik.handleChange}
+        />
+        <Typography sx={{ color: "error.main" }} variant="subtitle2">
+          {formik.errors.first_name ? formik.errors.first_name : null}
+        </Typography>
+        <Input
+          fullWidth
+          placeholder="Last name"
+          inputProps={ariaLabel}
+          name="last_name"
+          value={formik.values.last_name}
+          onChange={formik.handleChange}
+        />
+        <Typography sx={{ color: "error.main" }} variant="subtitle2">
+          {formik.errors.last_name ? formik.errors.last_name : null}
+        </Typography>
+        {/* <Input
+          fullWidth
+          placeholder="Creation date"
+          type="date"
+          inputProps={ariaLabel}
+          name="creation"
+          value={formik.values.creation}
+          onChange={formik.handleChange}
+        /> */}
+        <Input
+          fullWidth
+          placeholder="Email"
+          type="email"
+          inputProps={ariaLabel}
+          name="email"
+          value={formik.values.email}
+          onChange={formik.handleChange}
+        />
+        <Typography sx={{ color: "error.main" }} variant="subtitle2">
+          {formik.errors.email ? formik.errors.email : null}
+        </Typography>
+        <Button
+          type="submit"
+          style={{ margin: 10 }}
+          variant="contained"
+          fullWidth
+        >
+          Register
+        </Button>
+      </Box>
+    </Card>
   );
 }
-
-export default Register;

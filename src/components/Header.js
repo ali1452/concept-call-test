@@ -94,7 +94,7 @@ export default function Dashboard() {
           </IconButton>
           <Typography
             onClick={() => {
-              navigation("/");
+              navigation("dashboard/projects/all");
             }}
             variant="h6"
             noWrap

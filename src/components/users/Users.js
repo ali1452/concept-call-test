@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import axios from "axios";
 
 import * as React from "react";
@@ -10,23 +10,24 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
+import SearchIcon from '@mui/icons-material/Search';
 import {
   Alert,
   CircularProgress,
   Typography,
   Stack,
   Pagination,
-  Avatar
+  Avatar,
+  TextField,
+  InputAdornment
 } from "@mui/material";
 
 import EditUsers from "./EditUsers";
 import UsersAlertDialog from "./UsersAlerDialog";
 
-export default function Users({ status }) {
+export default function Users() {
+  const [searchUser,setSearchUser]=React.useState("");
   const [pageNumber,setPageNumber] =React.useState(1)
-  const queryClient = useQueryClient();
-//   const queryString = status === "all" ? "" : `status=${status}`;
-  // console.log({ status, queryString });
   const handleChange = (event, value) => {
     return setPageNumber(value);}
 
@@ -35,32 +36,45 @@ export default function Users({ status }) {
       .get(`http://localhost:8000/users?_limit=5&_page=${pageNumber}`)
       .then((res) => res.data)
   );
-  // console.log("data", data.length);
-
-  const mutation = useMutation(
-    (user) => {
-      return axios.put("http://localhost:8000/users/" + user.id, user);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("users");
-      },
-    }
-  );
+  
 
   if (isLoading) return <CircularProgress />;
 
   if (error) return <Alert>An error has occurred: {error.message}</Alert>;
 
   return (
-    <Stack style={{ backgroundColor: "#5891ed", height: "100vh" }}>
+  <>
+  
+  <Box
+      component="form"
+      sx={{
+        '& > :not(style)': { m: 1, width: '25ch' },marginBottom: 7
+      }}
+      noValidate
+      autoComplete="off"
+    >
+       <Typography variant="h6">Search User</Typography>
+      <TextField
+      fullWidth
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <SearchIcon />
+          </InputAdornment>
+        ),
+      }}
+      id="outlined-basic"  variant="outlined"
+       onChange={(e)=>setSearchUser(e.target.value)}
+      />
+    </Box>
+    <Stack style={{ backgroundColor: "#5891ed", height: "100vh", width:"1400px" }}>
+
       <Typography
         sx={{ marginX: 5, marginTop: -5, marginBottom: 2 }}
         variant="h5"
       >
         Users Detail
       </Typography>
-
       <div
         style={{
           border: "1px solid black",
@@ -90,54 +104,41 @@ export default function Users({ status }) {
                 <TableCell align="center">
                   <strong>Gender</strong>
                 </TableCell>
-                {/* <TableCell align="center">
-                  <strong>Status</strong>
-                </TableCell>
-                <TableCell align="center">
-                  <strong>Description</strong>
-                </TableCell> */}
                 <TableCell align="left">
                   <strong>Actions</strong>
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.map((row, index) => (
+              {data.filter((val)=>{
+                if(searchUser==""){
+                  return val
+                }else if(val.first_name.toLowerCase().includes(searchUser.toLowerCase())){
+                  return val
+                }else if(val.last_name.toLowerCase().includes(searchUser.toLowerCase())){
+                  return val
+                }
+              }).map((row, index) => (
                 <TableRow
                   key={row.id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                      <TableCell align="right" component="th" scope="row">
-                     <Avatar alt="Remy Sharp" src={row.url} />
+                     <Avatar alt="image" src={row.url} />
                   </TableCell>
                   <TableCell align="right" component="th" scope="row">
                     {row.id}
                   </TableCell>
                   <TableCell align="center">{row.first_name}</TableCell>
                   <TableCell align="center">{row.last_name}</TableCell>
-
                   <TableCell align="center">{row.email}</TableCell>
-                  {/* <TableCell align="center">{row.gender}</TableCell> */}
-
                   <TableCell align="center">
-                    {row.gender==1?"Male":"Female"}
+                    {row.gender===1?"Male":"Female"}
                   </TableCell>
-                  {/* <TableCell align="center">{row.description}</TableCell> */}
                   <TableCell align="center">
                     <Box sx={{ display: "flex" }}>
                       <EditUsers users={row} />
                       <UsersAlertDialog users={row} />
-                      {/* {row.status !== 2 && (
-                        <IconButton
-                          variant="outlined"
-                          style={{ marginLeft: "8px" }}
-                          onClick={() => {
-                            mutation.mutate({ ...row, status: 2 });
-                          }}
-                        >
-                          <ArchiveIcon />
-                        </IconButton>
-                      )} */}
                     </Box>
                   </TableCell>
                 </TableRow>
@@ -153,5 +154,6 @@ export default function Users({ status }) {
         <Pagination count={4} variant="outlined" shape="rounded"  onChange={handleChange}/>
       </Stack>
     </Stack>
+    </>
   );
 }
