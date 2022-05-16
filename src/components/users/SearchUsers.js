@@ -1,13 +1,17 @@
+import { useQuery } from "react-query";
+import axios from "axios";
+
+import * as React from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
 import SearchIcon from '@mui/icons-material/Search';
 import {
-  Table,
-  TableBody,
-  TableContainer,
-  TableHead,
-  TableCell,
-  TableRow,
-  Paper,
-  Box,
   Alert,
   CircularProgress,
   Typography,
@@ -15,24 +19,33 @@ import {
   Pagination,
   Avatar,
   TextField,
-  InputAdornment
+  InputAdornment,
+  Button
 } from "@mui/material";
-import { useQuery } from "react-query";
-import axios from "axios";
-import * as React from "react";
 
 import EditUsers from "./EditUsers";
 import UsersAlertDialog from "./UsersAlerDialog";
 
-export default function Users() {
-  const [searchUser,setSearchUser]=React.useState("");
+export default function SearchUsers() {
+  const [user,setUser]=React.useState("");
+  const [searchUser,setSearchUser]=React.useState(user);
   const [pageNumber,setPageNumber] =React.useState(1)
   const handleChange = (event, value) => {
-    return setPageNumber(value);}
+    return setPageNumber(value)};
+   
+    const findUser =(user)=>{
+     setSearchUser(user);
+    console.log(user);
+    }
 
-  const { isLoading, error, data } = useQuery(["users",pageNumber], () =>
+
+    const handleSearch =(e,value)=>{
+      // e.preventDefault();
+      setUser(e.target.value)
+}
+  const { isLoading, error, data } = useQuery(["users",pageNumber,searchUser], () =>
     axios
-      .get(`http://localhost:8000/users?_limit=5&_page=${pageNumber}`)
+      .get(`http://localhost:8000/users?_limit=5&_page=${pageNumber}&q=${searchUser}`)
       .then((res) => res.data)
   );
   
@@ -54,18 +67,20 @@ export default function Users() {
       noValidate
       autoComplete="off"
     >
-       <Typography variant="h6">Search User</Typography>
+       <Typography variant="h6">Search User ||</Typography>
       <TextField
-      sx={{fontSize:"30px"}}
+      autoFocus
+      sx={{fontSize:"30px",}}
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">
-            <SearchIcon />
+           <Button onClick={()=> findUser(user)}> <SearchIcon /></Button>
           </InputAdornment>
         ),
       }}
       id="outlined-basic"  variant="outlined"
-       onChange={(e)=>setSearchUser(e.target.value)}
+      value={user}
+      onChange={handleSearch}
       />
     </Box>
     <Stack style={{ backgroundColor: "#5891ed", height: "100vh", width:"1400px" }}>
@@ -112,15 +127,7 @@ export default function Users() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.filter((val)=>{
-                if(searchUser === ""){
-                  return val
-                }else if(val.first_name.toLowerCase().includes(searchUser.toLowerCase())){
-                  return val
-                }else if(val.last_name.toLowerCase().includes(searchUser.toLowerCase())){
-                  return val
-                }
-              }).map((row, index) => (
+              {data.map((row, index) => (
                 <TableRow
                   key={row.id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

@@ -45,8 +45,10 @@ export default function Register() {
     navigate("/");
   };
 
-  const mutation = useMutation((user) => {
-    return axios.post("http://localhost:8000/users", user);
+  const mutation = useMutation(async (user) => {
+    // return axios.post("http://localhost:8000/users", user);
+    return await axios.post("https://myreactdata-default-rtdb.firebaseio.com/users.json", user);
+
   });
   return (
     <Card

@@ -10,6 +10,8 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Products from "./components/Products";
 import Users from "./components/users/Users";
+import SearchUsers from "./components/users/SearchUsers";
+import FirebaseList from "./components/FirebaseList";
 
 export const queryClient = new QueryClient();
 export const UserContext = createContext();
@@ -34,6 +36,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="createproject" element={<CreateProject />} />
+          <Route path="firebase" element={<FirebaseList />} />
           <Route
             path="dashboard/projects/all"
             element={<Projects status="all" />}
@@ -49,6 +52,7 @@ function App() {
           <Route path="edit" element={<EditProject />} />
           <Route path="products" element={<Products />} />
           <Route path="users" element={<Users />} />
+          <Route path="search" element={<SearchUsers />} />
 
         </Routes>
       </>

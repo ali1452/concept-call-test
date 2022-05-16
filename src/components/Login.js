@@ -1,3 +1,5 @@
+import { auth,provider } from "../firebase-config";
+import { signInWithPopup } from "firebase/auth";
 import React, { useContext } from "react";
 import { useNavigate } from "react-router";
 import { Button, TextField, Typography, Link, Card } from "@mui/material";
@@ -7,6 +9,13 @@ import { UserContext } from "../App";
 function Login(props) {
   const { setIsLoggedIn } = useContext(UserContext);
   const navigate = useNavigate();
+  const signInWithGoogle =()=>{
+    signInWithPopup(auth,provider).then((result) =>{
+      localStorage.setItem('true',true)
+      setIsLoggedIn(true)
+      navigate('users')
+    })
+  }
   return (
     <div style={{ height: "100vh" }}>
       <Card
@@ -51,16 +60,20 @@ function Login(props) {
               autoComplete="current-password"
             />
             <Button
-              style={{ marginLeft: "100px" }}
+              style={{ marginLeft: "100px",marginBottom:"2px" }}
               variant="contained"
               onClick={() => {
                 setIsLoggedIn(true);
-                navigate("dashboard/projects/all");
+                navigate('users');
               }}
             >
               Log In
             </Button>
             <br></br>
+            <Button
+             style={{marginLeft: "50px"  }}
+             variant="contained"
+            onClick={signInWithGoogle}>Sign In With Google</Button>
             <Link
               style={{ margin: "40%" }}
               onClick={() => {

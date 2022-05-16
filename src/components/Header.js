@@ -1,3 +1,5 @@
+import { auth,provider } from "../firebase-config";
+import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import { styled, useTheme } from "@mui/material/styles";
@@ -11,11 +13,13 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+import CottageIcon from '@mui/icons-material/Cottage';
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 
 import { UserContext } from "../App";
+import { Stack } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -65,10 +69,15 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 export default function Dashboard() {
-  // const { setIsLoggedIn } = useContext(UserContext);
+  const { setIsLoggedIn } = useContext(UserContext);
   const navigation = useNavigate();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
+  const signUserOut =()=> signOut(auth).then(()=>{
+    localStorage.clear()
+    setIsLoggedIn(false)
+
+  })
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -119,6 +128,9 @@ export default function Dashboard() {
         open={open}
       >
         <DrawerHeader>
+          {<Stack>
+            <CottageIcon sx={{marginRight:10, fontSize:"50px"}} color="primary" />
+            </Stack>}
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "ltr" ? (
               <ChevronLeftIcon />
@@ -129,6 +141,38 @@ export default function Dashboard() {
         </DrawerHeader>
         <Divider />
         <List>
+        <ListItem
+            onClick={() => {
+              navigation("users");
+              handleDrawerClose();
+            }}
+            button
+          >
+            Users
+          </ListItem>
+          <Divider></Divider>
+          <ListItem
+            onClick={() => {
+              navigation("firebase");
+              handleDrawerClose();
+            }}
+            button
+          >
+            firebaseList
+          </ListItem>
+          <Divider></Divider>
+
+          <ListItem
+            onClick={() => {
+              navigation("/search");
+              handleDrawerClose();
+            }}
+            button
+          >
+            Search Users
+          </ListItem>
+          <Divider></Divider>
+
           <ListItem
             onClick={() => {
               navigation("/createproject");
@@ -138,6 +182,8 @@ export default function Dashboard() {
           >
             Create Project
           </ListItem>
+          <Divider></Divider>
+
           <ListItem
             onClick={() => {
               navigation("dashboard/projects/all");
@@ -147,6 +193,8 @@ export default function Dashboard() {
           >
             All Projects
           </ListItem>
+          <Divider></Divider>
+
           <ListItem
             onClick={() => {
               navigation("dashboard/projects/completed");
@@ -156,6 +204,8 @@ export default function Dashboard() {
           >
             Complete Projects
           </ListItem>
+          <Divider></Divider>
+
           <ListItem
             onClick={() => {
               navigation("dashboard/projects/archive");
@@ -165,6 +215,8 @@ export default function Dashboard() {
           >
             Archive Projects
           </ListItem>
+          <Divider></Divider>
+
           <ListItem
             onClick={() => {
               navigation("products");
@@ -174,19 +226,16 @@ export default function Dashboard() {
           >
             Products
           </ListItem>
+          <Divider></Divider>
+
+   
           <ListItem
             onClick={() => {
-              navigation("users");
-              handleDrawerClose();
-            }}
-            button
-          >
-            Users
-          </ListItem>
-          <ListItem
-            onClick={() => {
+              signUserOut();
               navigation("/");
-              handleDrawerClose();
+              // handleDrawerClose();
+            
+
             }}
             button
           >
