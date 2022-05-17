@@ -1,14 +1,31 @@
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import GoogleButton from 'react-google-button'
 import { auth,provider } from "../firebase-config";
 import { signInWithPopup } from "firebase/auth";
-import React, { useContext } from "react";
+import React, { useContext,useState } from "react";
 import { useNavigate } from "react-router";
 import { Button, TextField, Typography, Link, Card } from "@mui/material";
 import { Box } from "@mui/system";
 import { UserContext } from "../App";
 
 function Login(props) {
+  const [email,setEmail] = useState();
+  const [password,setPassword] =useState();
   const { setIsLoggedIn } = useContext(UserContext);
   const navigate = useNavigate();
+  const LogIn= async ()=>{
+    try{
+         await signInWithEmailAndPassword(
+            auth,
+            email,
+            password)
+            setIsLoggedIn(true);
+            navigate('users');
+        alert("User has successfully Sign In")
+    } catch (error){
+        alert(error.message)
+    }
+}
   const signInWithGoogle =()=>{
     signInWithPopup(auth,provider).then((result) =>{
       localStorage.setItem('true',true)
@@ -48,6 +65,7 @@ function Login(props) {
             <TextField
               required
               id="outlined-email"
+              onChange={(e)=>setEmail(e.target.value)}
               label="email"
               type="email"
             />
@@ -55,6 +73,7 @@ function Login(props) {
             <TextField
               required
               id="outlined-required"
+              onChange={(e)=>setPassword(e.target.value)}
               label="Password"
               type="password"
               autoComplete="current-password"
@@ -62,18 +81,15 @@ function Login(props) {
             <Button
               style={{ marginLeft: "100px",marginBottom:"2px" }}
               variant="contained"
-              onClick={() => {
-                setIsLoggedIn(true);
-                navigate('users');
-              }}
+              onClick={ LogIn }
             >
               Log In
             </Button>
             <br></br>
-            <Button
-             style={{marginLeft: "50px"  }}
-             variant="contained"
-            onClick={signInWithGoogle}>Sign In With Google</Button>
+            <GoogleButton
+             style={{marginLeft: "25px"  }}
+             onClick={signInWithGoogle}
+             />
             <Link
               style={{ margin: "40%" }}
               onClick={() => {

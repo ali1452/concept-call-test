@@ -1,4 +1,4 @@
-import { auth,provider } from "../firebase-config";
+import { auth } from "../firebase-config";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
@@ -74,8 +74,10 @@ export default function Dashboard() {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const signUserOut =()=> signOut(auth).then(()=>{
-    localStorage.clear()
-    setIsLoggedIn(false)
+    localStorage.clear();
+    setIsLoggedIn(false);
+    navigation("/");
+
 
   })
 
@@ -232,7 +234,6 @@ export default function Dashboard() {
           <ListItem
             onClick={() => {
               signUserOut();
-              navigation("/");
               // handleDrawerClose();
             
 
