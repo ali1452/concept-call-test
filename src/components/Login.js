@@ -68,6 +68,7 @@ function Login(props) {
               onChange={(e)=>setEmail(e.target.value)}
               label="email"
               type="email"
+              autoComplete="off"
             />
 
             <TextField
@@ -76,7 +77,7 @@ function Login(props) {
               onChange={(e)=>setPassword(e.target.value)}
               label="Password"
               type="password"
-              autoComplete="current-password"
+              autoComplete="off"
             />
             <Button
               style={{ marginLeft: "100px",marginBottom:"2px" }}

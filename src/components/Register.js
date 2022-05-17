@@ -1,4 +1,5 @@
-
+import {createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase-config';
 import { useMutation } from "react-query";
 import axios from "axios";
 import { useNavigate } from "react-router";
@@ -13,15 +14,18 @@ const ariaLabel = { "aria-label": "description" };
 
 export default function Register() {
   const validationSchema = Yup.object().shape({
-    first_name: Yup.string()
-      .min(3, "Should be 3 character long")
-      .max(20, "should not exceed 20 characters")
-      .required("First name is required"),
+    // first_name: Yup.string()
+    //   .min(3, "Should be 3 character long")
+    //   .max(20, "should not exceed 20 characters")
+    //   .required("First name is required"),
 
-    last_name: Yup.string()
-      .min(3, "Should be 5 character long")
-      .max(20, "should not exceed 20 characters")
-      .required("Last name is required"),
+    // last_name: Yup.string()
+    //   .min(3, "Should be 5 character long")
+    //   .max(20, "should not exceed 20 characters")
+    //   .required("Last name is required"),
+    password: Yup.string()
+    // .min("min 6 character require")
+    .required("password is required"),
 
     email: Yup.string()
       .email("invalid email address")
@@ -30,15 +34,24 @@ export default function Register() {
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
-      first_name: "",
-      last_name: "",
+      // first_name: "",
+      // last_name: "",
       email: "",
+      password:""
     },
     validationSchema,
-    onSubmit: (values) => {
-      mutation.mutate(values);
-      relocate();
-    },
+    onSubmit: async (value)=>{
+      try{
+          await createUserWithEmailAndPassword(auth,value.email,value.password)
+          relocate();
+          console.log("User has successfully Registered")
+      } catch (error){
+          alert(error.message)
+      }}
+    // onSubmit: (values) => {
+    //   mutation.mutate(values);
+    //   relocate();
+    // },
   });
 
   const relocate = () => {
@@ -78,7 +91,7 @@ export default function Register() {
         <Typography variant="h5" sx={{ textAlign: "center" }}>
           New User
         </Typography>
-        <Input
+        {/* <Input
           fullWidth
           placeholder="First name"
           inputProps={ariaLabel}
@@ -88,8 +101,8 @@ export default function Register() {
         />
         <Typography sx={{ color: "error.main" }} variant="subtitle2">
           {formik.errors.first_name ? formik.errors.first_name : null}
-        </Typography>
-        <Input
+        </Typography> */}
+        {/* <Input
           fullWidth
           placeholder="Last name"
           inputProps={ariaLabel}
@@ -99,7 +112,7 @@ export default function Register() {
         />
         <Typography sx={{ color: "error.main" }} variant="subtitle2">
           {formik.errors.last_name ? formik.errors.last_name : null}
-        </Typography>
+        </Typography> */}
         {/* <Input
           fullWidth
           placeholder="Creation date"
@@ -120,6 +133,18 @@ export default function Register() {
         />
         <Typography sx={{ color: "error.main" }} variant="subtitle2">
           {formik.errors.email ? formik.errors.email : null}
+        </Typography>
+        <Input
+          fullWidth
+          placeholder="password"
+          type="password"
+          inputProps={ariaLabel}
+          name="password"
+          value={formik.values.password}
+          onChange={formik.handleChange}
+        />
+        <Typography sx={{ color: "error.main" }} variant="subtitle2">
+          {formik.errors.password ? formik.errors.password : null}
         </Typography>
         <Button
           type="submit"
