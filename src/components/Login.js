@@ -21,7 +21,6 @@ function Login(props) {
             password)
             setIsLoggedIn(true);
             navigate('users');
-        alert("User has successfully Sign In")
     } catch (error){
         alert(error.message)
     }
@@ -34,15 +33,16 @@ function Login(props) {
     })
   }
   return (
-    <div style={{ height: "100vh" }}>
+    <div style={{ height: "100vh", backgroundImage: `url(https://images.pexels.com/photos/1191710/pexels-photo-1191710.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1})`,backgroundRepeat:"no-repeat",backgroundSize:"cover"}}>
       <Card
         sx={{
           display: "inline-block",
           marginTop: "10%",
+          opacity:"0.9",
           marginX: "10%",
           border: "1px solid black",
           maxWidth: "90%",
-          height: "300px",
+          height: "350px",
           backgroundColor: "#f6f2f7",
         }}
       >
@@ -80,7 +80,7 @@ function Login(props) {
               autoComplete="off"
             />
             <Button
-              style={{ marginLeft: "100px",marginBottom:"2px" }}
+              style={{ marginLeft: "25px",marginBottom:"4px",width:"240px" }}
               variant="contained"
               onClick={ LogIn }
             >

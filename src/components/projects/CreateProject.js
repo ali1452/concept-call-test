@@ -51,7 +51,8 @@ export default function CreateProject() {
   return (
     <Card
       sx={{
-        marginX: "5%",
+        // marginX: "5%",
+        margin:"auto",
         height: "auto",
         width: "360px",
         // minWidth: "100%",

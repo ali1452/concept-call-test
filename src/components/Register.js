@@ -8,7 +8,7 @@ import * as Yup from "yup";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Input from "@mui/material/Input";
-import { Button, Card, Typography } from "@mui/material";
+import { Button, Card, Stack, Typography } from "@mui/material";
 
 const ariaLabel = { "aria-label": "description" };
 
@@ -64,12 +64,14 @@ export default function Register() {
 
   });
   return (
+    <Stack sx={{height: "100vh",backgroundImage: `url(https://images.pexels.com/photos/1191710/pexels-photo-1191710.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1})`,backgroundRepeat:"no-repeat",backgroundSize:"cover"}}>
     <Card
       sx={{
         marginX: "5%",
         marginTop:"5%",
         height: "auto",
         width: "360px",
+        opacity:"0.9",
         // minWidth: "100%",
         maxWidth: "80%",
         backgroundColor: "#f6f2f7",
@@ -156,5 +158,6 @@ export default function Register() {
         </Button>
       </Box>
     </Card>
+    </Stack>
   );
 }
