@@ -41,7 +41,7 @@ function Login(props) {
           opacity:"0.9",
           marginX: "10%",
           border: "1px solid black",
-          maxWidth: "90%",
+          maxWidth: "100%",
           height: "350px",
           backgroundColor: "#f6f2f7",
         }}

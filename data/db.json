@@ -233,20 +233,19 @@
       "id": 10
     },
     {
-      "name": "Al-Shifa Hospital",
-      "description": "This is hospital app",
-      "url": "al-shifa@gmail.com",
-      "creation": "2022-04-26",
-      "id": 11,
-      "status": 1
-    },
-    {
       "name": "Al-Muzammil Works",
       "description": "This workshop app",
       "url": "muzammil@exampe.com",
       "creation": "2022-04-14",
       "id": 13,
       "status": 1
+    },
+    {
+      "name": "The Tailor Shop",
+      "description": "This is for custom tailoring shop",
+      "url": "tailorz@test.com",
+      "creation": "2022-06-04",
+      "id": 14
     }
   ]
 }
