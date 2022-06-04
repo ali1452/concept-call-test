@@ -80,7 +80,7 @@ function Login(props) {
               autoComplete="off"
             />
             <Button
-              style={{ marginLeft: "20px",marginBottom:"4px",width:"240px" }}
+              style={{ marginLeft: "10px",marginBottom:"4px",width:"240px" }}
               variant="contained"
               onClick={ LogIn }
             >
@@ -88,7 +88,7 @@ function Login(props) {
             </Button>
             <br></br>
             <GoogleButton
-             style={{marginLeft: "25px"  }}
+             style={{marginLeft: "10px"  }}
              onClick={signInWithGoogle}
              />
             <Link
