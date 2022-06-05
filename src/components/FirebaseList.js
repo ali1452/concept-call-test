@@ -1,11 +1,8 @@
-import { Stack, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { db } from '../firebase-config';
 import {collection,getDocs} from 'firebase/firestore'
 
-const handleChange=()=>{
-    console.log('helo')
-}
+
 function FirebaseList(props) {
     const [project,setProject] = useState([]);
     const projectCollectionRef = collection(db,"projects")
@@ -20,22 +17,26 @@ getProject();
 
     return (
         <table>
-              <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Desciption</th>
-                    <th>Status</th>
+              <tr style={{display:"flex", justifyContent:"space-around"}}>
+                    <th style={{width: "100px",margin:"10px", textAlign:"center"}}>Name</th>
+                    <th style={{width: "140px",margin:"10px", textAlign:"center"}}>Email</th>
+                    <th style={{width: "100px",margin:"10px", textAlign:"center"}}>Desciption</th>
+                    <th style={{width: "100px",margin:"10px", textAlign:"center"}}>Status</th>
                     </tr>
             {project.map((item)=>{
                 return (
                 <div>
-                    <tr>
-                    <td>
-                    {item.id} 
+               <tr style={{display:"flex", justifyContent:"space-around", direction:"columns"}}>
+                    <td style={{width: "100px",margin:"10px", textAlign:"center"}}>
                     {item.name} 
-                    {item.email} 
+                    </td>
+                    <td style={{width: "140px",margin:"10px", textAlign:"center"}}>
+                    {item.url} 
+                    </td>
+                    <td style={{width: "100px",margin:"10px", textAlign:"center"}}>
                     {item.description} 
+                    </td>
+                    <td style={{width: "100px",margin:"10px", textAlign:"center"}}>
                     {item.status}
                     </td>
                     </tr>
