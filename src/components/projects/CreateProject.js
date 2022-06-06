@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Input from "@mui/material/Input";
-import { Button, Card, Pagination, Typography } from "@mui/material";
+import { Button, Card,Typography } from "@mui/material";
 
 const ariaLabel = { "aria-label": "description" };
 
@@ -126,6 +126,14 @@ export default function CreateProject() {
           fullWidth
         >
           Create
+        </Button>
+        <Button
+          style={{ margin: 10 }}
+          // variant="contained"
+          fullWidth
+          onClick={()=>navigate(-1)}
+        >
+          Go to Back
         </Button>
       </Box>
     </Card>

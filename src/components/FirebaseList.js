@@ -37,7 +37,7 @@ getProject();
                     {item.description} 
                     </td>
                     <td style={{width: "100px",margin:"10px", textAlign:"center"}}>
-                    {item.status}
+                    {item.status === 1? "active": "archived"}
                     </td>
                     </tr>
                     </div>
