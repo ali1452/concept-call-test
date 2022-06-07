@@ -16,6 +16,7 @@ import NoMatch from "./components/NoMatch";
 
 export const queryClient = new QueryClient();
 export const UserContext = createContext();
+const api = "http://localhost:8000/users";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
