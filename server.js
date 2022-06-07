@@ -9,7 +9,7 @@ const port = process.env.PORT || 8000;
 server.use(middleWare);
 server.use(
     jsonServer.rewriter({
-        "/api/*":"/$1",
+        "/http://localhost:8000/users/*":"/$1",
     })
 );
 
