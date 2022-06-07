@@ -32,7 +32,7 @@ export default function Users() {
 
   const { isLoading, error, data } = useQuery(["users",pageNumber], () =>
     axios
-      .get(`http://localhost:8000/users?_limit=5&_page=${pageNumber}`)
+      .get(`https://conceptcall.herokuapp.com/:8000/users?_limit=5&_page=${pageNumber}`)
       .then((res) => res.data)
   );
   

@@ -9,7 +9,7 @@ const port = process.env.PORT || 8000;
 server.use(middleWare);
 server.use(
     jsonServer.rewriter({
-        "/https://conceptcall.herokuapp.com/:8000/projects/*":"/$1",
+        "/http://localhost:8000/projects/*":"/$1",
     })
 );
 
