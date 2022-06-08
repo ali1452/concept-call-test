@@ -25,8 +25,10 @@ import {
 
 import EditUsers from "./EditUsers";
 import UsersAlertDialog from "./UsersAlerDialog";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchUsers() {
+  const navigation = useNavigate();
   const [user,setUser]=React.useState("");
   const [searchUser,setSearchUser]=React.useState(user);
   const [pageNumber,setPageNumber] =React.useState(1)
@@ -67,6 +69,8 @@ export default function SearchUsers() {
       noValidate
       autoComplete="off"
     >
+    <Button variant="contained" onClick={()=> navigation(-1)}>Go Back</Button>
+
        <Typography variant="h6">Search User ||</Typography>
       <TextField
       autoFocus
