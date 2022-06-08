@@ -20,12 +20,14 @@ import {
   Avatar,
   TextField,
   InputAdornment,
-  Button
+  Button,
+  IconButton
 } from "@mui/material";
 
 import EditUsers from "./EditUsers";
 import UsersAlertDialog from "./UsersAlerDialog";
 import { useNavigate } from "react-router-dom";
+import { ArrowBack } from "@material-ui/icons";
 
 export default function SearchUsers() {
   const navigation = useNavigate();
@@ -57,6 +59,7 @@ export default function SearchUsers() {
   if (error) return <Alert>An error has occurred: {error.message}</Alert>;
 
   return (
+    <>
   <Stack sx={{
     marginLeft:"4px",
     height:"100vh"
@@ -69,8 +72,18 @@ export default function SearchUsers() {
       noValidate
       autoComplete="off"
     >
-    <Button variant="contained" onClick={()=> navigation(-1)}>Go Back</Button>
-
+    {/* <Button variant="contained" onClick={()=> navigation(-1)}>Go Back</Button> */}
+    <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={()=> navigation(-1)}
+            style={{ backgroundColor: 'transparent' }} 
+            width= "0.5em"
+            // edge="start"
+          >
+            <ArrowBack sx={{ marginLeft:"-11em" }} />
+            <Typography>Back</Typography>
+          </IconButton>
        <Typography variant="h6">Search User ||</Typography>
       <TextField
       autoFocus
@@ -168,5 +181,6 @@ export default function SearchUsers() {
       </Stack>
     </Stack>
     </Stack>
+    </>
   );
 }
